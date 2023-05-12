@@ -1,58 +1,80 @@
 #include<stdio.h>
-#include<conio.h>
-#define DLE 16
-#define STX 2
-#define ETX 3
+#include<string.h>
+
 int main()
 {
-char ch,arr[50]={DLE,STX},rec[50];
-int len=2,i,j;
-//clrscr();
-printf("enter the data stream:ctrl+p->DLE ctrl+b->STX ctrl+c->ETX \n");
-while((ch=getch())!='\r')
-{
-if(ch==DLE)
-{
-arr[len++]=DLE;
-printf("DLE");
-}
-else if(ch==STX)
-printf("STX");
-else if(ch==ETX)
-printf("ETX");
-else printf("%c",ch);
-arr[len++]=ch;
-}
-arr[len++]=DLE;
-arr[len++]=ETX;
-printf("\n the stuffed stream is:\n");
-for(i=0;i<len;i++)
-{
-ch=arr[i];
-if(ch==DLE)
-printf("DLE");else if(ch==STX)
-printf("STX");
-else if(ch==ETX)
-printf("ETX");
-else printf("%c",ch);
-}
-//destuffing
-printf("\n the destuffed data dtream is:\n");
-for(j=2;j<len-2;j++)
-{
-ch=arr[j];
-if(ch==DLE)
-{
-printf("DLE");
-j++;
-}
-else if(ch==STX)
-printf("STX");
-else if(ch==ETX)
-printf("ETX");
-else printf("%c",ch);
-}
-system("pause");
-getch ();
-return 0;
+	int i,k,j,n,p,g,h,l,x;
+	char a[20],b[20];
+	char c[] = {'D','L','E','S','T','X'};
+	char d[] = {'D','L','E','E','T','X'};
+	char e[] = {'D','L','E'};
+	printf("Enter the size of frames: ");
+	scanf("%d",&n);
+	printf("Enter the chars: ");
+	for(i=0;i<n;i++)
+	{
+		scanf("%s",&a[i]);
+	}
+	i = 0;
+	
+	while(i<n)
+	{	for(i=0;i<n;i++)
+		{
+			if(a[i-2]=='D' && a[i-1]=='L' && a[i]=='E')
+			{
+				b[j] = a[i];
+				j++;
+				for(p=0;p<3;p++)
+				{
+					b[j] = e[p];
+					j++;
+				}
+			}
+			else
+			{
+				b[j] = a[i];
+				j++;
+			}
+		}
+		
+	}
+printf("After Bit Stuffing :");
+for(i=0; i<6; i++)
+    printf("%c",c[i]);
+printf(" ");
+for(i=1;i<=j; i++)
+    printf("%c",b[i]);
+printf(" ");
+for(i=0; i<6; i++)
+    printf("%c",d[i]);
+printf("\n");   
+
+j = 0;
+l = sizeof(b);
+char f[100];
+	
+	while(i<l)
+	{	for(i=0;i<l;i++)
+		{
+			if(b[i-2]=='D' && b[i-1]=='L' && b[i]=='E')
+			{
+				f[j] = b[i];
+				j++;
+				i = i+3;
+
+			}
+			else
+			{
+				f[j] = b[i];
+				j++;
+			}
+		}
+		
+	}
+printf("After De-Bit Stuffing :");
+
+for(i=1;i<=j; i++)
+    printf("%c",f[i]);
+
+       
 }
